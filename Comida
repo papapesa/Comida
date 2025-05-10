@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Refeições com Amigos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #388e3c;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 20px;
+      background: white;
+      margin: 10px;
+      border-radius: 8px;
+    }
+    footer {
+      background: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+    .form-section input, .form-section textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+    }
+    .form-section button {
+      background: #2e7d32;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Refeições com Amigos</h1>
+    <p>Partilhando refeições, criando laços.</p>
+  </header>
+
+  <nav>
+    <a href="#inicio">Início</a>
+    <a href="#quem-somos">Quem Somos</a>
+    <a href="#marcar">Marcar</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#apoio">Apoio</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <section id="inicio">
+    <h2>Bem-vindo</h2>
+    <p>Este projeto reúne amigos e famílias para partilhar refeições e bons momentos.</p>
+  </section>
+
+  <section id="quem-somos">
+    <h2>Quem Somos</h2>
+    <p>Somos um grupo de amigos que acredita no poder das refeições para unir pessoas.</p>
+  </section>
+
+  <section id="marcar">
+    <h2>Marcar uma Refeição</h2>
+    <p>Preencha este formulário para sugerir ou marcar um encontro.</p>
+    <div class="form-section">
+      <form>
+        <input type="text" placeholder="Seu Nome" required>
+        <input type="date" required>
+        <input type="text" placeholder="Local sugerido" required>
+        <textarea placeholder="Comentário adicional"></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <h2>Galeria</h2>
+    <p>Fotos dos nossos momentos especiais (em breve).</p>
+  </section>
+
+  <section id="apoio">
+    <h2>Apoie o Projeto</h2>
+    <p>Quer ajudar ou patrocinar? Entre em contato conosco.</p>
+  </section>
+
+  <section id="contato">
+    <h2>Contato</h2>
+    <p>Email: refeicoescomamigos@gmail.com</p>
+    <p>WhatsApp: +351 912 345 678</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Refeições com Amigos</p>
+  </footer>
+
+</body>
+</html>
