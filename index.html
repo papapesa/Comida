@@ -59,24 +59,58 @@
     <h1>Receitas Perfeitas</h1>
     <p>Descubra 200 pratos incríveis com fotos, ingredientes e modo de preparo.</p>
   </header>
-  <main class="receitas">
-    <!-- RECEITAS AQUI -->
-    <!-- O conteúdo a seguir será gerado dinamicamente -->
-    <script>
-      const receitas = [
-        {
-          titulo: "Incrível lasanha à moda francesa",
-          descricao: "Uma receita perfeita para momentos especiais. Com sabores marcantes e uma preparação encantadora, a incrível lasanha à moda francesa conquista todos os paladares.",
-          ingredientes: ["Ervas finas", "Tomate", "Azeite", "Carne moída", "Queijo"],
-          modo: "Leve ao forno por 30 minutos a 180°C.",
-          imagem: "https://source.unsplash.com/400x300/?food&sig=1"
-        },
-        {
-          titulo: "Refrescante omelete à moda japonesa",
-          descricao: "Uma receita perfeita para momentos especiais. Com sabores marcantes e uma preparação encantadora, a refrescante omelete à moda japonesa conquista todos os paladares.",
-          ingredientes: ["Frango desfiado", "Pimenta-do-reino", "Azeite", "Cebola picada", "Creme de leite"],
-          modo: "Refogue os ingredientes em fogo médio.",
-          imagem: "https://source.unsplash.com/400x300/?food&sig=2"
-        }
-        // ... outras 198 receitas serão adicionadas abaixo da mesma forma
-      ];
+  <main class="receitas"></main>
+  <script>
+    const baseIngredientes = [
+      "óleo de oliva", "cebola picada", "alho picado", "sal", "pimenta-do-reino",
+      "tomate", "queijo", "creme de leite", "farinha de trigo", "ovos", "leite",
+      "manteiga", "carne moída", "frango desfiado", "ervas finas", "azeite"
+    ];
+    const tecnicas = [
+      "Refogue os ingredientes em fogo médio.",
+      "Misture bem até obter uma textura homogênea.",
+      "Leve ao forno por 30 minutos a 180°C.",
+      "Deixe cozinhar por 15 minutos com a panela tampada.",
+      "Sirva quente com acompanhamentos à sua escolha."
+    ];
+    const adjetivos = ["Deliciosa", "Incrível", "Tradicional", "Refrescante", "Saborosa", "Exótica", "Simples", "Rápida", "Caseira", "Autêntica"];
+    const pratos = ["lasanha", "feijoada", "moqueca", "salada", "sopa", "risoto", "curry", "omelete", "torta", "hambúrguer", "strogonoff", "bolo", "panqueca", "quiche", "pudim", "macarrão", "pizza", "wrap", "yakisoba", "ceviche"];
+    const estilos = ["italiana", "brasileira", "japonesa", "mexicana", "francesa", "indiana", "vegana", "fit", "gourmet", "rústica"];const receitas = [];
+const usados = new Set();
+while (receitas.length < 200) {
+  const nome = `${adjetivos[Math.floor(Math.random()*adjetivos.length)]} ${pratos[Math.floor(Math.random()*pratos.length)]} à moda ${estilos[Math.floor(Math.random()*estilos.length)]}`;
+  if (!usados.has(nome)) {
+    usados.add(nome);
+    const ingredientes = Array.from({length:5}, () => baseIngredientes[Math.floor(Math.random()*baseIngredientes.length)]);
+    const modo = tecnicas[Math.floor(Math.random()*tecnicas.length)];
+    const descricao = `Uma receita perfeita para momentos especiais. Com sabores marcantes e uma preparação encantadora, a ${nome.toLowerCase()} conquista todos os paladares.`;
+    receitas.push({
+      titulo: nome,
+      descricao,
+      ingredientes,
+      modo,
+      imagem: `https://source.unsplash.com/400x300/?food&sig=${receitas.length + 1}`
+    });
+  }
+}
+
+const container = document.querySelector('.receitas');
+receitas.forEach((r) => {
+  const card = document.createElement('div');
+  card.className = 'receita';
+  card.innerHTML = `
+    <img src="${r.imagem}" alt="Imagem de ${r.titulo}" />
+    <div class="conteudo">
+      <h2>${r.titulo}</h2>
+      <p>${r.descricao}</p>
+      <strong>Ingredientes:</strong>
+      <ul>${r.ingredientes.map(i => `<li>${i}</li>`).join('')}</ul>
+      <p class="modo">${r.modo}</p>
+    </div>
+  `;
+  container.appendChild(card);
+});
+
+  </script>
+</body>
+</html>
