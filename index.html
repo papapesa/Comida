@@ -1,10 +1,120 @@
-import { Card, CardContent } from "@/components/ui/card"; import { Input } from "@/components/ui/input"; import { useState } from "react"; import { motion } from "framer-motion";
+<!DOCTYPE html><html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receitas do Paraíso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to right, #fef9f4, #e8f0f8);
+      color: #333;
+      padding: 40px 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #666;
+    }
+    input[type="text"] {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px;
+      font-size: 1rem;
+      margin: 30px auto 50px;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.3s;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-in forwards;
+    }
+    .card:hover { transform: scale(1.03); }
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-content h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #004080;
+    }
+    .card-content p {
+      font-size: 0.95rem;
+      color: #666;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Receitas do Paraíso</h1>
+    <p>Descubra 200 pratos incríveis de todo o mundo</p>
+    <input type="text" id="search" placeholder="Procurar receita...">
+  </header>
+  <div class="grid" id="recipes">
+    <!-- Os cartões das receitas serão gerados aqui -->
+  </div>
+  <script>
+    const recipes = [];
+    for (let i = 1; i <= 200; i++) {
+      recipes.push({
+        title: `Receita #${i}`,
+        desc: `Uma deliciosa sugestão para o seu momento gourmet. Receita número ${i}.`,
+        img: `https://source.unsplash.com/400x300/?food&sig=${i}`
+      });
+    }
+    const container = document.getElementById('recipes');
+    const search = document.getElementById('search');function renderRecipes(filter = '') {
+  container.innerHTML = '';
+  recipes
+    .filter(r => r.title.toLowerCase().includes(filter.toLowerCase()))
+    .forEach((r, idx) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.animationDelay = `${idx * 10}ms`;
+      card.innerHTML = `
+        <img src="${r.img}" alt="${r.title}">
+        <div class="card-content">
+          <h3>${r.title}</h3>
+          <p>${r.desc}</p>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+}
 
-const receitas = Array.from({ length: 1000 }, (_, i) => ({ id: i + 1, titulo: Receita ${i + 1}, ingredientes: Ingredientes da receita ${i + 1}, preparo: Modo de preparo da receita ${i + 1}, imagem: https://source.unsplash.com/400x300/?food&sig=${i + 1}, }));
+search.addEventListener('input', (e) => {
+  renderRecipes(e.target.value);
+});
 
-export default function ReceitasApp() { const [busca, setBusca] = useState("");
+renderRecipes();
 
-const receitasFiltradas = receitas.filter(r => r.titulo.toLowerCase().includes(busca.toLowerCase()) );
-
-return ( <div className="p-4 max-w-6xl mx-auto"> <h1 className="text-4xl font-bold mb-4">As Melhores Receitas</h1> <Input placeholder="Pesquisar receitas..." className="mb-6" value={busca} onChange={(e) => setBusca(e.target.value)} /> <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"> {receitasFiltradas.slice(0, 60).map((receita) => ( <motion.div key={receita.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} > <Card className="rounded-2xl shadow-md overflow-hidden"> <img src={receita.imagem} alt={receita.titulo} className="w-full h-48 object-cover" /> <CardContent> <h2 className="text-xl font-semibold mb-2">{receita.titulo}</h2> <p className="text-sm mb-1"><strong>Ingredientes:</strong> {receita.ingredientes}</p> <p className="text-sm"><strong>Preparo:</strong> {receita.preparo}</p> </CardContent> </Card> </motion.div> ))} </div> </div> ); }
-
+  </script>
+</body>
+</html>
