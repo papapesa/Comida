@@ -1,78 +1,10 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card"; import { Input } from "@/components/ui/input"; import { useState } from "react"; import { motion } from "framer-motion";
 
-const receitas = Array.from({ length: 1000 }, (_, i) => ({
-  id: i + 1,
-  titulo: `Receita ${i + 1}`,
-  ingredientes: `Ingredientes da receita ${i + 1}`,
-  preparo: `Modo de preparo da receita ${i + 1}`,
-  imagem: `https://source.unsplash.com/400x300/?food&sig=${i + 1}`,
-}));
+const receitas = Array.from({ length: 1000 }, (_, i) => ({ id: i + 1, titulo: Receita ${i + 1}, ingredientes: Ingredientes da receita ${i + 1}, preparo: Modo de preparo da receita ${i + 1}, imagem: https://source.unsplash.com/400x300/?food&sig=${i + 1}, }));
 
-export default function ReceitasApp() {
-  const [busca, setBusca] = useState("");
+export default function ReceitasApp() { const [busca, setBusca] = useState("");
 
-  const receitasFiltradas = receitas.filter(r =>
-    r.titulo.toLowerCase().includes(busca.toLowerCase())
-  );
+const receitasFiltradas = receitas.filter(r => r.titulo.toLowerCase().includes(busca.toLowerCase()) );
 
-  return (
-    <div className="p-4 max-w-6xl mx-auto">
-      <h1 className="text-4xl font-bold mb-4">As Melhores Receitas</h1>
-      <Input
-        placeholder="Pesquisar receitas..."
-        className="mb-6"
-        value={busca}
-        onChange={(e) => setBusca(e.target.value)}
-      />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {receitasFiltradas.slice(0, 60).map((receita) => (
-          <motion.div
-            key={receita.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Card className="rounded-2xl shadow-md overflow-hidden">
-              <img src={receita.imagem} alt={receita.titulo} className="w-full h-48 object-cover" />
-              <CardContent>
-                <h2 className="text-xl font-semibold mb-2">{receita.titulo}</h2>
-                <p className="text-sm mb-1"><strong>Ingredientes:</strong> {receita.ingredientes}</p>
-                <p className="text-sm"><strong>Preparo:</strong> {receita.preparo}</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-
-Criei um site moderno em React com 1000 receitas geradas automaticamente em português de Portugal. Ele inclui:
-
-Título e campo de pesquisa.
-
-Grid com cards de receitas (imagem, ingredientes, modo de preparo).
-
-Animações suaves com Framer Motion.
-
-Estilo elegante com Tailwind CSS e componentes shadcn/ui.
-
-
-Atualmente exibe 60 receitas por vez (pode ser ajustado). Queres agora:
-
-1. Exportar esse site para hospedar?
-
-
-2. Adicionar categorias, favoritos ou receitas reais?
-
-
-3. Gerar receitas autênticas portuguesas?
-
-
-
-Diz-me o que preferes que faço já!
+return ( <div className="p-4 max-w-6xl mx-auto"> <h1 className="text-4xl font-bold mb-4">As Melhores Receitas</h1> <Input placeholder="Pesquisar receitas..." className="mb-6" value={busca} onChange={(e) => setBusca(e.target.value)} /> <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"> {receitasFiltradas.slice(0, 60).map((receita) => ( <motion.div key={receita.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} > <Card className="rounded-2xl shadow-md overflow-hidden"> <img src={receita.imagem} alt={receita.titulo} className="w-full h-48 object-cover" /> <CardContent> <h2 className="text-xl font-semibold mb-2">{receita.titulo}</h2> <p className="text-sm mb-1"><strong>Ingredientes:</strong> {receita.ingredientes}</p> <p className="text-sm"><strong>Preparo:</strong> {receita.preparo}</p> </CardContent> </Card> </motion.div> ))} </div> </div> ); }
 
