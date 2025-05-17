@@ -178,7 +178,7 @@ for (let i = 1; i <= 100; i++) {
     nome: nomes[i - 1],
     descricao: `Uma receita perfeita número ${i}, ideal para qualquer ocasião!`,
     ingredientes,
-    modo: modos[Math.floor(Math.random() * modos.length)],
+    modo: `Modo de preparo: ${modos[Math.floor(Math.random() * modos.length)]}`,
     imagem: `https://source.unsplash.com/400x300/?food&sig=${i}`
   };
   receitas.push(receita);
