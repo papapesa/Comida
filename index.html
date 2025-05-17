@@ -1,206 +1,30 @@
-<!DOCTYPE html><html lang="pt">
+<!DOCTYPE html>
+<html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Receitas Perfeitas</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f8f5;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #ff7043;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    .receitas {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-    }
-    .receita {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-    .receita img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-    .conteudo {
-      padding: 1rem;
-    }
-    h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
-    }
-    ul {
-      margin: 0;
-      padding-left: 1.2rem;
-    }
-    .modo {
-      font-style: italic;
-      margin-top: 0.5rem;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
   <header>
     <h1>Receitas Perfeitas</h1>
-    <p>Explore 100 receitas com ingredientes e preparo!</p>
+    <p>Descubra receitas incríveis para todos os gostos!</p>
   </header>
-  <main class="receitas" id="listaReceitas"></main>
-  <script>
-    const receitas = [];
-    const ingredientesBase = ["cebola", "alho", "tomate", "azeite", "sal", "pimenta", "frango", "carne", "batata", "arroz", "feijão", "cenoura", "ervilhas", "milho", "manteiga", "leite", "ovos", "queijo", "presunto", "massa"];
-    const modos = [
-      "Refogue todos os ingredientes em fogo médio.",
-      "Cozinhe por 20 minutos com a panela tampada.",
-      "Misture bem e leve ao forno por 40 minutos.",
-      "Grelhe até dourar de ambos os lados.",
-      "Bata no liquidificador até ficar homogêneo e sirva frio."
-    ];const nomes = [
-  "Risoto do Paraíso",
-  "Frango Tropical",
-  "Sopa da Montanha",
-  "Lasanha à Moda Antiga",
-  "Feijoada Brasileira",
-  "Sushi do Mar",
-  "Curry Encantado",
-  "Torta do Campo",
-  "Pizza dos Deuses",
-  "Macarrão Primavera",
-  "Strogonoff de Sonho",
-  "Hambúrguer do Chef",
-  "Paella Real",
-  "Cuscuz da Vovó",
-  "Salada Arco-Íris",
-  "Espetinho Mágico",
-  "Gnocchi da Sorte",
-  "Panqueca Celestial",
-  "Moqueca Solar",
-  "Sanduíche Supremo",
-  "Picanha Premium",
-  "Taco da Festa",
-  "Chili Estelar",
-  "Pastel da Feira",
-  "Caldo Reconfortante",
-  "Arroz à Grega",
-  "Bacalhau do Amor",
-  "Pudim Divino",
-  "Quiche Especial",
-  "Camarão Dourado",
-  "Suflê de Nuvem",
-  "Tortilla Mística",
-  "Canelone da Alma",
-  "Polenta Real",
-  "Fondue da Montanha",
-  "Carne ao Vinho",
-  "Wrap do Amanhã",
-  "Tabule dos Sabores",
-  "Escondidinho da Roça",
-  "Tainha Encantada",
-  "Filé ao Molho Verde",
-  "Caril de Grão",
-  "Salada Crocante",
-  "Kebab Oriental",
-  "Sopa da Colheita",
-  "Yakissoba Surpresa",
-  "Temaki do Sol",
-  "Crepe Sonhador",
-  "Bolo de Milagre",
-  "Manjar das Estrelas",
-  "Mousse de Amor",
-  "Brigadeiro de Ouro",
-  "Torta Gelada",
-  "Café com Canela",
-  "Tapioca da Ilha",
-  "Empadão Secreto",
-  "Bolo de Festa",
-  "Ratatouille Sonhadora",
-  "Focaccia do Campo",
-  "Risoto de Cogumelos",
-  "Salmão Encantado",
-  "Nhoque de Abóbora",
-  "Kibe do Oriente",
-  "Bife Acebolado",
-  "Batata Recheada",
-  "Purê Cremoso",
-  "Arroz Caribenho",
-  "Tilápia da Praia",
-  "Almôndega Macia",
-  "Pão de Alho",
-  "Sopa de Mandioquinha",
-  "Bolo de Chocolate",
-  "Torta de Limão",
-  "Frango Xadrez",
-  "Carne de Panela",
-  "Sopa de Cebola",
-  "Sopa de Feijão",
-  "Carne Moída Gratinada",
-  "Berinjela à Parmegiana",
-  "Tabule do Líbano",
-  "Creme de Abóbora",
-  "Risoto de Limão",
-  "Penne Quatro Queijos",
-  "Omelete de Ervas",
-  "Lombo Natalino",
-  "Cuscuz Nordestino",
-  "Salpicão Tropical",
-  "Molho Pesto Caseiro",
-  "Carne Louca",
-  "Macarronada à Bolonhesa",
-  "Pizza Marguerita",
-  "Sopa de Abobrinha",
-  "Torradas com Patê",
-  "Tapioca Doce",
-  "Empanado de Frango",
-  "Torta de Frango",
-  "Espaguete ao Alho",
-  "Panqueca Doce",
-  "Cocada Cremosa",
-  "Doce de Leite Caseiro",
-  "Torta de Maçã",
-  "Brownie Delicioso",
-  "Frango ao Curry",
-  "Costela Barbecue"
-];
 
-for (let i = 1; i <= 100; i++) {
-  const ingredientes = Array.from({length: 5}, () => ingredientesBase[Math.floor(Math.random() * ingredientesBase.length)]);
-  const receita = {
-    nome: nomes[i - 1],
-    descricao: `Uma receita perfeita número ${i}, ideal para qualquer ocasião!`,
-    ingredientes,
-    modo: `Modo de preparo: ${modos[Math.floor(Math.random() * modos.length)]}`,
-    imagem: `https://source.unsplash.com/400x300/?food&sig=${i}`
-  };
-  receitas.push(receita);
-}
+  <main class="recipe-grid">
+    {{ range .Site.RegularPages }}
+      <article class="recipe-card">
+        <a href="{{ .RelPermalink }}">
+          <img src="{{ .Params.imagem }}" alt="{{ .Title }}">
+          <h2>{{ .Title }}</h2>
+        </a>
+        <p>{{ .Summary }}</p>
+      </article>
+    {{ end }}
+  </main>
 
-const container = document.getElementById("listaReceitas");
-receitas.forEach(r => {
-  const card = document.createElement("div");
-  card.className = "receita";
-  card.innerHTML = `
-    <img src="${r.imagem}" alt="Imagem de ${r.nome}">
-    <div class="conteudo">
-      <h2>${r.nome}</h2>
-      <p>${r.descricao}</p>
-      <strong>Ingredientes:</strong>
-      <ul>${r.ingredientes.map(i => `<li>${i}</li>`).join('')}</ul>
-      <p class="modo">${r.modo}</p>
-    </div>
-  `;
-  container.appendChild(card);
-});
-
-  </script>
+  <footer>
+    <p>&copy; 2025 Receitas Perfeitas</p>
+  </footer>
 </body>
 </html>
