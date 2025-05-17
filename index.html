@@ -1,130 +1,168 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Receitas Perfeitas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --cor-principal: #ff5e57;
+      --cor-secundaria: #fff6f4;
+      --fonte: 'Segoe UI', sans-serif;
+    }
     body {
-      margin: 0; font-family: Arial, sans-serif; background: #f8f8f8; color: #333;
+      margin: 0;
+      font-family: var(--fonte);
+      background: #fafafa;
+      color: #333;
     }
-    header.hero {
-      background: #ff5733; color: white; padding: 2rem; text-align: center;
+    header {
+      background: var(--cor-principal);
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
-    header.hero a.button {
-      background: white; color: #ff5733; padding: 0.5rem 1rem; border-radius: 5px; text-decoration: none; font-weight: bold;
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
     }
-    main.recipe-grid {
+    header input {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 5px;
+      width: 200px;
+      max-width: 100%;
+    }
+    main {
+      padding: 2rem;
+    }
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
+      gap: 2rem;
     }
-    article.recipe-card {
-      background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
     }
-    article.recipe-card:hover {
-      transform: scale(1.03);
+    .card:hover {
+      transform: scale(1.02);
     }
-    article.recipe-card img {
-      width: 100%; height: 200px; object-fit: cover;
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
     }
-    article.recipe-card h2 {
-      padding: 0.5rem; font-size: 1.1rem; color: #ff5733; margin: 0;
+    .card h2 {
+      margin: 1rem;
+      font-size: 1.2rem;
+      color: var(--cor-principal);
     }
-    article.recipe-card .summary {
-      padding: 0 0.5rem 1rem;
-      font-size: 0.9rem;
+    .card p {
+      margin: 0 1rem 1rem;
+      font-size: 0.95rem;
       color: #555;
     }
-    section.form-section {
-      background: white;
-      max-width: 600px;
-      margin: 3rem auto;
+    .card a.botao {
+      margin: 0 1rem 1rem;
+      background: var(--cor-principal);
+      color: white;
+      padding: 0.5rem;
+      text-align: center;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .formulario {
+      background: var(--cor-secundaria);
+      margin-top: 4rem;
       padding: 2rem;
       border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    section.form-section h2 {
-      margin-top: 0;
-      color: #ff5733;
+    .formulario h2 {
       text-align: center;
+      color: var(--cor-principal);
     }
-    form {
+    .formulario form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
-    form input, form textarea {
+    .formulario input, .formulario textarea {
       padding: 0.8rem;
       font-size: 1rem;
       border-radius: 5px;
       border: 1px solid #ccc;
-      resize: vertical;
     }
-    form button {
-      background: #ff5733;
+    .formulario button {
+      background: var(--cor-principal);
       color: white;
-      padding: 0.8rem;
       border: none;
+      padding: 0.8rem;
+      font-size: 1rem;
       border-radius: 5px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
-    form button:hover {
-      background: #e14a2b;
     }
     footer {
       text-align: center;
-      padding: 1rem;
-      background: #f0f0f0;
       font-size: 0.9rem;
-      color: #777;
-      margin-top: 3rem;
+      padding: 2rem;
+      background: #f1f1f1;
+      margin-top: 4rem;
     }
   </style>
 </head>
 <body>
 
-  <header class="hero">
+  <header>
     <h1>Receitas Perfeitas</h1>
-    <p>Receitas deliciosas enviadas por você!</p>
+    <input type="text" placeholder="Buscar receitas..." />
   </header>
 
-  <main class="recipe-grid">
-    {{ range .Site.RegularPages }}
-      <article class="recipe-card">
-        <a href="{{ .RelPermalink }}">
-          <img src="{{ .Params.imagem }}" alt="{{ .Title }}" />
+  <main>
+    <section class="grid">
+      {{ range .Site.RegularPages }}
+        <div class="card">
+          <img src="{{ .Params.imagem }}" alt="{{ .Title }}">
           <h2>{{ .Title }}</h2>
-        </a>
-        <div class="summary">{{ .Summary }}</div>
-      </article>
-    {{ end }}
+          <p>{{ .Summary }}</p>
+          <a class="botao" href="{{ .RelPermalink }}">Ver Receita</a>
+        </div>
+      {{ end }}
+    </section>
+
+    <section class="formulario">
+      <h2>Envie sua Receita</h2>
+      <form name="enviar-receita" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="enviar-receita" />
+        <p style="display:none">
+          <label>Não preencher: <input name="bot-field" /></label>
+        </p>
+        <input type="text" name="nome" placeholder="Seu nome" required />
+        <input type="text" name="titulo" placeholder="Nome da receita" required />
+        <input type="url" name="imagem" placeholder="URL da imagem (opcional)" />
+        <textarea name="ingredientes" rows="4" placeholder="Ingredientes" required></textarea>
+        <textarea name="preparo" rows="5" placeholder="Modo de preparo" required></textarea>
+        <button type="submit">Enviar Receita</button>
+      </form>
+    </section>
   </main>
 
-  <section class="form-section">
-    <h2>Envie Sua Receita</h2>
-    <form name="enviar-receita" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-      <!-- Campo oculto anti-spam -->
-      <input type="hidden" name="form-name" value="enviar-receita" />
-      <p style="display:none">
-        <label>Não preencher: <input name="bot-field" /></label>
-      </p>
-
-      <input type="text" name="nome" placeholder="Seu nome" required />
-      <input type="text" name="titulo" placeholder="Nome da receita" required />
-      <input type="url" name="imagem" placeholder="URL da imagem (opcional)" />
-      <textarea name="ingredientes" placeholder="Ingredientes" rows="4" required></textarea>
-      <textarea name="preparo" placeholder="Modo de preparo" rows="5" required></textarea>
-      <button type="submit">Enviar Receita</button>
-    </form>
-  </section>
-
   <footer>
-    &copy; 2025 Receitas Perfeitas
+    &copy; 2025 Receitas Perfeitas. Inspirado por PetitChef.
   </footer>
 
 </body>
