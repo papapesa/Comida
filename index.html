@@ -2,93 +2,174 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Santi Virtual - Chatbot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Santi Virtual - ChatGPT Plus Style</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
-    #chatbox {
-      background-color: #1e1e1e;
-      width: 100%;
-      max-width: 600px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff;
+      color: #111;
       display: flex;
       flex-direction: column;
-      height: 600px;
+      height: 100vh;
+      overflow: hidden;
     }
+
+    /* Top bar */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      background: #fafafa;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-weight: 600;
+      font-size: 18px;
+      z-index: 10;
+      user-select: none;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+    }
+
+    /* Main container */
+    #chatbox {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 720px;
+      margin: 52px auto 0;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
+      background: white;
+      overflow: hidden;
+      height: calc(100vh - 72px);
+    }
+
+    /* Messages area */
     #messages {
-      flex-grow: 1;
-      padding: 15px;
+      flex: 1;
+      padding: 24px 20px;
       overflow-y: auto;
-      border-bottom: 1px solid #333;
-      font-size: 16px;
-      line-height: 1.4;
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
+
+    #messages::-webkit-scrollbar {
+      width: 8px;
+    }
+    #messages::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    /* Message bubbles */
     .message {
-      margin-bottom: 15px;
-      max-width: 80%;
-      padding: 10px 14px;
-      border-radius: 15px;
+      max-width: 65%;
+      padding: 14px 18px;
+      border-radius: 20px;
+      line-height: 1.5;
+      font-size: 16px;
+      white-space: pre-wrap;
       word-wrap: break-word;
     }
     .user {
-      background-color: #3a86ff;
+      background-color: #10a37f;
       color: white;
       align-self: flex-end;
       border-bottom-right-radius: 0;
     }
     .bot {
-      background-color: #2a2a2a;
-      color: #ddd;
+      background-color: #f0f0f0;
+      color: #111;
       align-self: flex-start;
       border-bottom-left-radius: 0;
     }
+
+    /* Input area */
     #inputArea {
+      border-top: 1px solid #ddd;
+      padding: 16px 20px;
+      background-color: #fafafa;
       display: flex;
-      border-top: 1px solid #333;
+      gap: 12px;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
     }
+
     #userInput {
       flex-grow: 1;
-      padding: 15px;
-      border: none;
       font-size: 16px;
-      background-color: #121212;
-      color: #e0e0e0;
-      border-bottom-left-radius: 12px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
       outline: none;
+      transition: border-color 0.3s ease;
+      background: white;
+      color: #111;
     }
+    #userInput:focus {
+      border-color: #10a37f;
+      box-shadow: 0 0 0 2px rgba(16,163,127,0.3);
+    }
+
     #sendButton {
-      background-color: #3a86ff;
-      color: white;
+      background-color: #10a37f;
       border: none;
-      padding: 0 20px;
+      color: white;
+      font-weight: 600;
       font-size: 16px;
+      padding: 0 24px;
+      border-radius: 12px;
       cursor: pointer;
-      border-bottom-right-radius: 12px;
       transition: background-color 0.3s ease;
     }
-    #sendButton:hover {
-      background-color: #265fd4;
+    #sendButton:hover:not(:disabled) {
+      background-color: #0e8e6d;
+    }
+    #sendButton:disabled {
+      background-color: #6fd6bb;
+      cursor: not-allowed;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      #chatbox {
+        margin: 52px 10px 0;
+        height: calc(100vh - 72px);
+      }
+      .message {
+        max-width: 85%;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div id="chatbox">
-    <div id="messages"></div>
-    <div id="inputArea">
-      <input type="text" id="userInput" placeholder="Digite sua pergunta..." autocomplete="off" />
-      <button id="sendButton">Enviar</button>
-    </div>
+  <header>Santi Virtual</header>
+
+  <div id="chatbox" role="main" aria-label="Chat com Santi Virtual">
+    <div id="messages" aria-live="polite" aria-atomic="false"></div>
+    <form id="inputArea" onsubmit="sendMessage(event)" autocomplete="off">
+      <input
+        type="text"
+        id="userInput"
+        name="userInput"
+        placeholder="Digite sua pergunta..."
+        aria-label="Campo para digitar mensagem"
+        required
+      />
+      <button type="submit" id="sendButton">Enviar</button>
+    </form>
   </div>
 
   <script>
@@ -120,7 +201,8 @@
       }
     }
 
-    function sendMessage() {
+    function sendMessage(event) {
+      if(event) event.preventDefault();
       const input = userInput.value.trim();
       if(input === '') return;
 
@@ -131,10 +213,12 @@
       userInput.focus();
     }
 
-    sendButton.addEventListener('click', sendMessage);
-    userInput.addEventListener('keypress', function(e) {
-      if(e.key === 'Enter') sendMessage();
+    userInput.addEventListener('input', () => {
+      sendButton.disabled = userInput.value.trim() === '';
     });
+
+    // Inicializa botão desabilitado
+    sendButton.disabled = true;
   </script>
 
 </body>
