@@ -4,27 +4,97 @@
   <meta charset="UTF-8" />
   <title>Santi Virtual - Chatbot</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
-    #chatbox { width: 100%; max-width: 500px; margin: auto; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    #messages { height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
-    .message { margin-bottom: 10px; }
-    .user { color: blue; }
-    .bot { color: green; }
-    input[type="text"] { width: 80%; padding: 10px; }
-    button { padding: 10px; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #chatbox {
+      background-color: #1e1e1e;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      height: 600px;
+    }
+    #messages {
+      flex-grow: 1;
+      padding: 15px;
+      overflow-y: auto;
+      border-bottom: 1px solid #333;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .message {
+      margin-bottom: 15px;
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 15px;
+      word-wrap: break-word;
+    }
+    .user {
+      background-color: #3a86ff;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+    }
+    .bot {
+      background-color: #2a2a2a;
+      color: #ddd;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+    }
+    #inputArea {
+      display: flex;
+      border-top: 1px solid #333;
+    }
+    #userInput {
+      flex-grow: 1;
+      padding: 15px;
+      border: none;
+      font-size: 16px;
+      background-color: #121212;
+      color: #e0e0e0;
+      border-bottom-left-radius: 12px;
+      outline: none;
+    }
+    #sendButton {
+      background-color: #3a86ff;
+      color: white;
+      border: none;
+      padding: 0 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-bottom-right-radius: 12px;
+      transition: background-color 0.3s ease;
+    }
+    #sendButton:hover {
+      background-color: #265fd4;
+    }
   </style>
 </head>
 <body>
 
   <div id="chatbox">
     <div id="messages"></div>
-    <input type="text" id="userInput" placeholder="Digite sua pergunta..." />
-    <button onclick="sendMessage()">Enviar</button>
+    <div id="inputArea">
+      <input type="text" id="userInput" placeholder="Digite sua pergunta..." autocomplete="off" />
+      <button id="sendButton">Enviar</button>
+    </div>
   </div>
 
   <script>
     const messages = document.getElementById('messages');
     const userInput = document.getElementById('userInput');
+    const sendButton = document.getElementById('sendButton');
 
     function appendMessage(text, sender) {
       const div = document.createElement('div');
@@ -61,6 +131,7 @@
       userInput.focus();
     }
 
+    sendButton.addEventListener('click', sendMessage);
     userInput.addEventListener('keypress', function(e) {
       if(e.key === 'Enter') sendMessage();
     });
