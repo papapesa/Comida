@@ -2,168 +2,89 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Receitas Perfeitas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GameHub Max</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root {
-      --cor-principal: #ff5e57;
-      --cor-secundaria: #fff6f4;
-      --fonte: 'Segoe UI', sans-serif;
-    }
     body {
       margin: 0;
-      font-family: var(--fonte);
-      background: #fafafa;
-      color: #333;
+      font-family: sans-serif;
+      background-color: #0f0f0f;
+      color: white;
     }
     header {
-      background: var(--cor-principal);
-      padding: 1rem 2rem;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
+      background-color: #1a1a1a;
+      padding: 20px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
     }
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-    }
-    header input {
-      padding: 0.5rem;
-      border: none;
-      border-radius: 5px;
-      width: 200px;
-      max-width: 100%;
-    }
-    main {
-      padding: 2rem;
-    }
-    .grid {
+    .games {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
     }
-    .card {
-      background: white;
+    .game {
+      background-color: #1f1f1f;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-      display: flex;
-      flex-direction: column;
+      padding: 10px;
     }
-    .card:hover {
-      transform: scale(1.02);
+    .game h3 {
+      margin: 10px 0;
+      font-size: 18px;
     }
-    .card img {
+    iframe {
       width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .card h2 {
-      margin: 1rem;
-      font-size: 1.2rem;
-      color: var(--cor-principal);
-    }
-    .card p {
-      margin: 0 1rem 1rem;
-      font-size: 0.95rem;
-      color: #555;
-    }
-    .card a.botao {
-      margin: 0 1rem 1rem;
-      background: var(--cor-principal);
-      color: white;
-      padding: 0.5rem;
-      text-align: center;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .formulario {
-      background: var(--cor-secundaria);
-      margin-top: 4rem;
-      padding: 2rem;
-      border-radius: 10px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    .formulario h2 {
-      text-align: center;
-      color: var(--cor-principal);
-    }
-    .formulario form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .formulario input, .formulario textarea {
-      padding: 0.8rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .formulario button {
-      background: var(--cor-principal);
-      color: white;
+      height: 350px;
       border: none;
-      padding: 0.8rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
+      border-radius: 8px;
     }
     footer {
+      background-color: #1a1a1a;
       text-align: center;
-      font-size: 0.9rem;
-      padding: 2rem;
-      background: #f1f1f1;
-      margin-top: 4rem;
+      padding: 20px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Receitas Perfeitas</h1>
-    <input type="text" placeholder="Buscar receitas..." />
-  </header>
+<header>GameHub Max - 24 Jogos Online</header>
 
-  <main>
-    <section class="grid">
-      {{ range .Site.RegularPages }}
-        <div class="card">
-          <img src="{{ .Params.imagem }}" alt="{{ .Title }}">
-          <h2>{{ .Title }}</h2>
-          <p>{{ .Summary }}</p>
-          <a class="botao" href="{{ .RelPermalink }}">Ver Receita</a>
-        </div>
-      {{ end }}
-    </section>
+<div class="games">
+  <!-- Apenas 6 listados aqui como exemplo, depois coloco os outros 18 abaixo -->
+  <div class="game"><h3>Jogo da Velha</h3><iframe src="https://play.famobi.com/tic-tac-toe-classic"></iframe></div>
+  <div class="game"><h3>Sling Drift</h3><iframe src="https://play.famobi.com/sling-drift"></iframe></div>
+  <div class="game"><h3>Bubble Shooter</h3><iframe src="https://play.famobi.com/bubble-shooter"></iframe></div>
+  <div class="game"><h3>2048</h3><iframe src="https://play.famobi.com/2048"></iframe></div>
+  <div class="game"><h3>Cut the Rope</h3><iframe src="https://play.famobi.com/cut-the-rope"></iframe></div>
+  <div class="game"><h3>Mahjong World</h3><iframe src="https://play.famobi.com/mahjong-world"></iframe></div>
 
-    <section class="formulario">
-      <h2>Envie sua Receita</h2>
-      <form name="enviar-receita" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="enviar-receita" />
-        <p style="display:none">
-          <label>Não preencher: <input name="bot-field" /></label>
-        </p>
-        <input type="text" name="nome" placeholder="Seu nome" required />
-        <input type="text" name="titulo" placeholder="Nome da receita" required />
-        <input type="url" name="imagem" placeholder="URL da imagem (opcional)" />
-        <textarea name="ingredientes" rows="4" placeholder="Ingredientes" required></textarea>
-        <textarea name="preparo" rows="5" placeholder="Modo de preparo" required></textarea>
-        <button type="submit">Enviar Receita</button>
-      </form>
-    </section>
-  </main>
+  <!-- 18 jogos adicionais -->
+  <div class="game"><h3>Penalty Kicks</h3><iframe src="https://play.famobi.com/penalty-kicks"></iframe></div>
+  <div class="game"><h3>Solitaire Classic</h3><iframe src="https://play.famobi.com/solitaire-classic"></iframe></div>
+  <div class="game"><h3>Jelly Collapse</h3><iframe src="https://play.famobi.com/jelly-collapse"></iframe></div>
+  <div class="game"><h3>Connect the Dots</h3><iframe src="https://play.famobi.com/connect-the-dots"></iframe></div>
+  <div class="game"><h3>Knife Rain</h3><iframe src="https://play.famobi.com/knife-rain"></iframe></div>
+  <div class="game"><h3>Snake and Ladders</h3><iframe src="https://play.famobi.com/snakes-and-ladders"></iframe></div>
+  <div class="game"><h3>Smarty Bubbles</h3><iframe src="https://play.famobi.com/smarty-bubbles"></iframe></div>
+  <div class="game"><h3>3D Free Kick</h3><iframe src="https://play.famobi.com/3d-free-kick"></iframe></div>
+  <div class="game"><h3>Sudoku Classic</h3><iframe src="https://play.famobi.com/sudoku-classic"></iframe></div>
+  <div class="game"><h3>Basketball Stars</h3><iframe src="https://play.famobi.com/basketball-stars"></iframe></div>
+  <div class="game"><h3>Power Badminton</h3><iframe src="https://play.famobi.com/power-badminton"></iframe></div>
+  <div class="game"><h3>Street Ball Jam</h3><iframe src="https://play.famobi.com/street-ball-jam"></iframe></div>
+  <div class="game"><h3>Foot Chinko</h3><iframe src="https://play.famobi.com/foot-chinko"></iframe></div>
+  <div class="game"><h3>Gold Miner</h3><iframe src="https://play.famobi.com/gold-miner"></iframe></div>
+  <div class="game"><h3>Jewelish</h3><iframe src="https://play.famobi.com/jewelish"></iframe></div>
+  <div class="game"><h3>Hex Blitz</h3><iframe src="https://play.famobi.com/hex-blitz"></iframe></div>
+  <div class="game"><h3>Fuzzies</h3><iframe src="https://play.famobi.com/fuzzies"></iframe></div>
+  <div class="game"><h3>Word Search</h3><iframe src="https://play.famobi.com/word-search-classic"></iframe></div>
+</div>
 
-  <footer>
-    &copy; 2025 Receitas Perfeitas. Inspirado por PetitChef.
-  </footer>
+<footer>
+  © 2025 GameHub Max - Criado por Você!
+</footer>
 
 </body>
 </html>
