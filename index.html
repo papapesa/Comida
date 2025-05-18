@@ -1,63 +1,226 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>GameHub Max - Jogos</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #222;
-      color: #eee;
-      margin: 20px;
-    }
-    h1 {
-      color: #4CAF50;
-    }
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    li {
-      margin: 10px 0;
-    }
-    a {
-      color: #4CAF50;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>Mini Minecraft Básico com Mob</title>
+<style>
+  body { margin: 0; overflow: hidden; background: #87ceeb; }
+  #info {
+    position: absolute; top: 10px; left: 10px;
+    color: white; font-family: Arial, sans-serif;
+    background: rgba(0,0,0,0.5); padding: 10px;
+    max-width: 320px; z-index: 10;
+  }
+  #blockSelector {
+    position: absolute; bottom: 10px; left: 50%;
+    transform: translateX(-50%);
+    color: white; font-family: Arial, sans-serif;
+    background: rgba(0,0,0,0.5);
+    padding: 5px 10px; border-radius: 5px;
+    user-select: none; z-index: 10;
+  }
+  .blockSlot {
+    display: inline-block; width: 40px; height: 40px;
+    margin: 0 5px; border: 2px solid white;
+    line-height: 40px; text-align: center; font-weight: bold;
+    cursor: pointer; user-select: none;
+  }
+  .selected { border-color: yellow; }
+</style>
 </head>
 <body>
-  <h1>GameHub Max - Jogos</h1>
-  <ul>
-    <li><a href="https://papapesa.github.io/Comida/jogos/jogo-da-velha.html" target="_blank">Jogo da Velha</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/sling-drift.html" target="_blank">Sling Drift</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/bubble-shooter.html" target="_blank">Bubble Shooter</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/2048.html" target="_blank">2048</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/cut-the-rope.html" target="_blank">Cut the Rope</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/mahjong-world.html" target="_blank">Mahjong World</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/penalty-kicks.html" target="_blank">Penalty Kicks</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/solitaire-classic.html" target="_blank">Solitaire Classic</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/jelly-collapse.html" target="_blank">Jelly Collapse</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/connect-the-dots.html" target="_blank">Connect the Dots</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/knife-rain.html" target="_blank">Knife Rain</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/snake-and-ladders.html" target="_blank">Snake and Ladders</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/smarty-bubbles.html" target="_blank">Smarty Bubbles</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/3d-free-kick.html" target="_blank">3D Free Kick</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/sudoku-classic.html" target="_blank">Sudoku Classic</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/basketball-stars.html" target="_blank">Basketball Stars</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/power-badminton.html" target="_blank">Power Badminton</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/street-ball-jam.html" target="_blank">Street Ball Jam</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/foot-chinko.html" target="_blank">Foot Chinko</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/gold-miner.html" target="_blank">Gold Miner</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/jewelish.html" target="_blank">Jewelish</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/hex-blitz.html" target="_blank">Hex Blitz</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/fuzzies.html" target="_blank">Fuzzies</a></li>
-    <li><a href="https://papapesa.github.io/Comida/jogos/word-search.html" target="_blank">Word Search</a></li>
-    <li><a href="minecraft.html" target="_blank">Mini Minecraft (Jogo extra)</a></li>
-  </ul>
-</body>
-</html>
+<div id="info">
+  WASD = mover | Espaço = pular | Mouse = olhar<br>
+  Clique esquerdo = colocar bloco | Clique direito = remover bloco<br>
+  Teclas 1,2,3 para trocar bloco selecionado
+</div>
+<div id="blockSelector">
+  <div class="blockSlot selected" data-type="terra" style="background:#8B4513;">1</div>
+  <div class="blockSlot" data-type="pedra" style="background:#808080;">2</div>
+  <div class="blockSlot" data-type="madeira" style="background:#DEB887;">3</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.153.0/examples/js/controls/PointerLockControls.js"></script>
+
+<script>
+  // Setup básico
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x87ceeb);
+
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({antialias:true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  // Luz
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambientLight);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  dirLight.position.set(10, 20, 10);
+  scene.add(dirLight);
+
+  // Controle FPS
+  const controls = new THREE.PointerLockControls(camera, document.body);
+  document.body.addEventListener('click', () => controls.lock());
+
+  // Movimentação
+  const velocity = new THREE.Vector3();
+  const direction = new THREE.Vector3();
+  const move = { forward:false, backward:false, left:false, right:false };
+  let canJump = false;
+  let prevTime = performance.now();
+  const gravity = 30;
+  const playerHeight = 1.8;
+
+  // Inventário (blocos)
+  let selectedBlock = 'terra';
+
+  const blockSelector = document.getElementById('blockSelector');
+  const slots = blockSelector.querySelectorAll('.blockSlot');
+  slots.forEach(slot => {
+    slot.addEventListener('click', () => {
+      slots.forEach(s => s.classList.remove('selected'));
+      slot.classList.add('selected');
+      selectedBlock = slot.dataset.type;
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    switch(e.code){
+      case 'KeyW': move.forward = true; break;
+      case 'KeyS': move.backward = true; break;
+      case 'KeyA': move.left = true; break;
+      case 'KeyD': move.right = true; break;
+      case 'Space':
+        if(canJump) velocity.y = 10;
+        canJump = false;
+        break;
+      case 'Digit1':
+      case 'Digit2':
+      case 'Digit3':
+        const idx = parseInt(e.code.charAt(5))-1;
+        if(slots[idx]){
+          slots.forEach(s => s.classList.remove('selected'));
+          slots[idx].classList.add('selected');
+          selectedBlock = slots[idx].dataset.type;
+        }
+        break;
+    }
+  });
+  window.addEventListener('keyup', (e) => {
+    switch(e.code){
+      case 'KeyW': move.forward = false; break;
+      case 'KeyS': move.backward = false; break;
+      case 'KeyA': move.left = false; break;
+      case 'KeyD': move.right = false; break;
+    }
+  });
+
+  // Materiais dos blocos
+  const materials = {
+    terra: new THREE.MeshLambertMaterial({color: 0x8B4513}),
+    pedra: new THREE.MeshLambertMaterial({color: 0x808080}),
+    madeira: new THREE.MeshLambertMaterial({color: 0xDEB887}),
+    mob: new THREE.MeshLambertMaterial({color: 0x00ff00})
+  };
+
+  const blockGeo = new THREE.BoxGeometry(1,1,1);
+
+  // Armazenar blocos
+  const blocks = new Map();
+
+  function keyFromPos(x,y,z){
+    return `${x},${y},${z}`;
+  }
+
+  function addBlock(x,y,z,type){
+    const key = keyFromPos(x,y,z);
+    if(blocks.has(key)) return;
+
+    const mesh = new THREE.Mesh(blockGeo, materials[type]);
+    mesh.position.set(x,y,z);
+    mesh.userData = { key, type };
+    scene.add(mesh);
+    blocks.set(key, mesh);
+  }
+
+  function removeBlock(x,y,z){
+    const key = keyFromPos(x,y,z);
+    const mesh = blocks.get(key);
+    if(mesh){
+      scene.remove(mesh);
+      blocks.delete(key);
+    }
+  }
+
+  // Criar chão 20x1x20 de blocos terra
+  const worldSize = 20;
+  for(let x = -worldSize/2; x < worldSize/2; x++){
+    for(let z = -worldSize/2; z < worldSize/2; z++){
+      addBlock(x,0,z,'terra');
+    }
+  }
+
+  // Posicionar câmera no meio do chão, altura do jogador
+  camera.position.set(0, playerHeight, 0);
+
+  // Raycaster para interagir com blocos
+  const raycaster = new THREE.Raycaster();
+
+  function getIntersectedBlock(){
+    raycaster.setFromCamera(new THREE.Vector2(0,0), camera);
+    const intersects = raycaster.intersectObjects(Array.from(blocks.values()));
+    if(intersects.length > 0){
+      return intersects[0];
+    }
+    return null;
+  }
+
+  // Adicionar e remover blocos com clique
+  window.addEventListener('mousedown', e => {
+    if(!controls.isLocked) return;
+    e.preventDefault();
+    const intersect = getIntersectedBlock();
+    if(!intersect) return;
+
+    if(e.button === 0){ // esquerdo: colocar bloco
+      const pos = intersect.point.clone().add(intersect.face.normal.multiplyScalar(0.5));
+      const x = Math.floor(pos.x + 0.5);
+      const y = Math.floor(pos.y + 0.5);
+      const z = Math.floor(pos.z + 0.5);
+      addBlock(x,y,z, selectedBlock);
+    } else if(e.button === 2){ // direito: remover bloco
+      const mesh = intersect.object;
+      if(mesh.position.y > 0) removeBlock(mesh.position.x, mesh.position.y, mesh.position.z);
+    }
+  });
+
+  window.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Colisões simples com chão
+  function checkCollision(pos){
+    const footPos = new THREE.Vector3(pos.x, pos.y - 1.8, pos.z);
+    const key = keyFromPos(Math.floor(footPos.x), Math.floor(footPos.y), Math.floor(footPos.z));
+    return blocks.has(key);
+  }
+
+  // Mob passivo básico (cubo verde que anda aleatório)
+  const mob = new THREE.Mesh(blockGeo, materials.mob);
+  mob.position.set(3,1,3);
+  scene.add(mob);
+
+  let mobDir = new THREE.Vector3(1,0,0);
+  let mobMoveTimer = 0;
+
+  // Loop principal
+  function animate(){
+    requestAnimationFrame(animate);
+
+    if(controls.isLocked){
+      const time = performance.now();
+      const delta = (time - prevTime)/1000;
+      prevTime = time;
+
+      // Jogador
+      velocity.x -= velocity.x * 10.0 * delta
