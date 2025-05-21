@@ -1,225 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Santi Virtual - ChatGPT Plus Style</title>
+  <meta charset="UTF-8">
+  <title>Meus Jogos</title>
   <style>
-    /* Reset */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff;
-      color: #111;
+    body { font-family: Arial; background: #111; color: #fff; margin: 0; }
+    h1 { text-align: center; padding: 20px; }
+    .grid {
       display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
     }
-
-    /* Top bar */
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 52px;
-      background: #fafafa;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      font-weight: 600;
-      font-size: 18px;
-      z-index: 10;
-      user-select: none;
-      box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
-    }
-
-    /* Main container */
-    #chatbox {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      max-width: 720px;
-      margin: 52px auto 0;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
-      background: white;
-      overflow: hidden;
-      height: calc(100vh - 72px);
-    }
-
-    /* Messages area */
-    #messages {
-      flex: 1;
-      padding: 24px 20px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #cbd5e1 transparent;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    #messages::-webkit-scrollbar {
-      width: 8px;
-    }
-    #messages::-webkit-scrollbar-thumb {
-      background-color: #cbd5e1;
-      border-radius: 4px;
-    }
-
-    /* Message bubbles */
-    .message {
-      max-width: 65%;
-      padding: 14px 18px;
-      border-radius: 20px;
-      line-height: 1.5;
-      font-size: 16px;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-    .user {
-      background-color: #10a37f;
-      color: white;
-      align-self: flex-end;
-      border-bottom-right-radius: 0;
-    }
-    .bot {
-      background-color: #f0f0f0;
-      color: #111;
-      align-self: flex-start;
-      border-bottom-left-radius: 0;
-    }
-
-    /* Input area */
-    #inputArea {
-      border-top: 1px solid #ddd;
-      padding: 16px 20px;
-      background-color: #fafafa;
-      display: flex;
-      gap: 12px;
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
-    }
-
-    #userInput {
-      flex-grow: 1;
-      font-size: 16px;
-      padding: 14px 18px;
-      border-radius: 12px;
-      border: 1px solid #ddd;
-      outline: none;
-      transition: border-color 0.3s ease;
-      background: white;
-      color: #111;
-    }
-    #userInput:focus {
-      border-color: #10a37f;
-      box-shadow: 0 0 0 2px rgba(16,163,127,0.3);
-    }
-
-    #sendButton {
-      background-color: #10a37f;
-      border: none;
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      padding: 0 24px;
-      border-radius: 12px;
+    .game-card {
+      background: #222;
+      padding: 10px;
+      border-radius: 8px;
+      width: 200px;
+      text-align: center;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: transform 0.2s;
     }
-    #sendButton:hover:not(:disabled) {
-      background-color: #0e8e6d;
+    .game-card:hover {
+      transform: scale(1.05);
+      background: #333;
     }
-    #sendButton:disabled {
-      background-color: #6fd6bb;
-      cursor: not-allowed;
-    }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      #chatbox {
-        margin: 52px 10px 0;
-        height: calc(100vh - 72px);
-      }
-      .message {
-        max-width: 85%;
-      }
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
     }
   </style>
 </head>
 <body>
 
-  <header>Santi Virtual</header>
+<h1>Site de Jogos</h1>
+<div class="grid">
+  <div class="game-card" onclick="loadGame('mini-minecraft.html')">Mini Minecraft</div>
+  <div class="game-card" onclick="loadGame('snake.html')">Jogo da Cobrinha</div>
+  <div class="game-card" onclick="loadGame('pong.html')">Pong</div>
+  <div class="game-card" onclick="loadGame('flappy.html')">Flappy Bird</div>
+</div>
 
-  <div id="chatbox" role="main" aria-label="Chat com Santi Virtual">
-    <div id="messages" aria-live="polite" aria-atomic="false"></div>
-    <form id="inputArea" onsubmit="sendMessage(event)" autocomplete="off">
-      <input
-        type="text"
-        id="userInput"
-        name="userInput"
-        placeholder="Digite sua pergunta..."
-        aria-label="Campo para digitar mensagem"
-        required
-      />
-      <button type="submit" id="sendButton">Enviar</button>
-    </form>
-  </div>
+<div id="gameArea" style="display:none; padding:20px;">
+  <iframe id="gameFrame"></iframe>
+</div>
 
-  <script>
-    const messages = document.getElementById('messages');
-    const userInput = document.getElementById('userInput');
-    const sendButton = document.getElementById('sendButton');
-
-    function appendMessage(text, sender) {
-      const div = document.createElement('div');
-      div.classList.add('message', sender);
-      div.textContent = text;
-      messages.appendChild(div);
-      messages.scrollTop = messages.scrollHeight;
-    }
-
-    function getBotResponse(input) {
-      input = input.toLowerCase();
-
-      if(input.includes('oi') || input.includes('olá')) {
-        return 'Olá! Eu sou o Santi Virtual. Como posso ajudar você?';
-      } else if(input.includes('qual seu nome')) {
-        return 'Meu nome é Santi Virtual, seu assistente virtual!';
-      } else if(input.includes('como você está')) {
-        return 'Estou bem, obrigado por perguntar! E você?';
-      } else if(input.includes('adeus') || input.includes('tchau')) {
-        return 'Até mais! Foi bom conversar com você.';
-      } else {
-        return 'Desculpe, não entendi. Pode tentar outra pergunta?';
-      }
-    }
-
-    function sendMessage(event) {
-      if(event) event.preventDefault();
-      const input = userInput.value.trim();
-      if(input === '') return;
-
-      appendMessage(input, 'user');
-      const response = getBotResponse(input);
-      appendMessage(response, 'bot');
-      userInput.value = '';
-      userInput.focus();
-    }
-
-    userInput.addEventListener('input', () => {
-      sendButton.disabled = userInput.value.trim() === '';
-    });
-
-    // Inicializa botão desabilitado
-    sendButton.disabled = true;
-  </script>
+<script>
+  function loadGame(url) {
+    document.getElementById('gameFrame').src = url;
+    document.getElementById('gameArea').style.display = 'block';
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+</script>
 
 </body>
 </html>
