@@ -1,74 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Site com 100 Jogos</title>
+  <meta charset="UTF-8" />
+  <title>GameHub Max - Jogos</title>
   <style>
     body {
-      background: #0f0f0f;
-      color: #fff;
       font-family: Arial, sans-serif;
-      margin: 0;
+      background: #222;
+      color: #eee;
+      margin: 20px;
     }
     h1 {
-      text-align: center;
-      padding: 20px;
+      color: #4CAF50;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 15px;
-      padding: 20px;
+    ul {
+      list-style: none;
+      padding-left: 0;
     }
-    .game-card {
-      background: #1c1c1c;
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.2s;
-      border: 1px solid #333;
+    li {
+      margin: 10px 0;
     }
-    .game-card:hover {
-      background: #333;
-      transform: scale(1.05);
+    a {
+      color: #4CAF50;
+      text-decoration: none;
+      font-weight: bold;
     }
-    iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      display: none;
-    }
-    #gameFrameContainer {
-      padding: 20px;
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-
-<h1>Catálogo de 100 Jogos</h1>
-<div class="grid">
-  <!-- 100 jogos -->
-  <!-- Gerado via script para facilitar -->
-  <script>
-    for (let i = 1; i <= 100; i++) {
-      document.write(`<div class="game-card" onclick="loadGame('jogo${i}.html')">Jogo ${i}</div>`);
-    }
-  </script>
-</div>
-
-<div id="gameFrameContainer">
-  <iframe id="gameFrame"></iframe>
-</div>
-
-<script>
-  function loadGame(url) {
-    const frame = document.getElementById('gameFrame');
-    frame.src = url;
-    frame.style.display = 'block';
-    window.scrollTo(0, document.body.scrollHeight);
-  }
-</script>
-
+  <h1>GameHub Max - Jogos</h1>
+  <ul>
+    <li><a href="https://papapesa.github.io/Comida/jogos/jogo-da-velha.html" target="_blank">Jogo da Velha</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/sling-drift.html" target="_blank">Sling Drift</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/bubble-shooter.html" target="_blank">Bubble Shooter</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/2048.html" target="_blank">2048</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/cut-the-rope.html" target="_blank">Cut the Rope</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/mahjong-world.html" target="_blank">Mahjong World</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/penalty-kicks.html" target="_blank">Penalty Kicks</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/solitaire-classic.html" target="_blank">Solitaire Classic</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/jelly-collapse.html" target="_blank">Jelly Collapse</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/connect-the-dots.html" target="_blank">Connect the Dots</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/knife-rain.html" target="_blank">Knife Rain</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/snake-and-ladders.html" target="_blank">Snake and Ladders</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/smarty-bubbles.html" target="_blank">Smarty Bubbles</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/3d-free-kick.html" target="_blank">3D Free Kick</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/sudoku-classic.html" target="_blank">Sudoku Classic</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/basketball-stars.html" target="_blank">Basketball Stars</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/power-badminton.html" target="_blank">Power Badminton</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/street-ball-jam.html" target="_blank">Street Ball Jam</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/foot-chinko.html" target="_blank">Foot Chinko</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/gold-miner.html" target="_blank">Gold Miner</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/jewelish.html" target="_blank">Jewelish</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/hex-blitz.html" target="_blank">Hex Blitz</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/fuzzies.html" target="_blank">Fuzzies</a></li>
+    <li><a href="https://papapesa.github.io/Comida/jogos/word-search.html" target="_blank">Word Search</a></li>
+    <li><a href="minecraft.html" target="_blank">Mini Minecraft (Jogo extra)</a></li>
+  </ul>
 </body>
 </html>
