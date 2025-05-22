@@ -1,71 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Block Blast Clone</title>
+  <title>WikiBlast</title>
   <style>
     body {
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: #111;
-      color: white;
+      font-family: "Linux Libertine", Georgia, serif;
+      background-color: #f6f6f6;
+      color: #202122;
+      margin: 0;
     }
 
-    #game-board {
-      display: grid;
-      grid-template-columns: repeat(10, 30px);
-      grid-template-rows: repeat(10, 30px);
-      gap: 2px;
-      margin-top: 20px;
+    header {
+      background-color: #ffffff;
+      border-bottom: 1px solid #a2a9b1;
+      padding: 20px;
+      text-align: center;
     }
 
-    .cell {
-      width: 30px;
-      height: 30px;
-      background-color: #333;
-      border: 1px solid #222;
+    header h1 {
+      margin: 0;
+      font-size: 32px;
     }
 
-    .filled {
-      background-color: #00BCD4;
+    nav {
+      background-color: #f8f9fa;
+      border-right: 1px solid #a2a9b1;
+      width: 200px;
+      height: 100vh;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      padding: 20px;
     }
 
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-bottom: 10px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #0645ad;
+    }
+
+    main {
+      margin-left: 220px;
+      padding: 20px;
+    }
+
+    h2 {
+      border-bottom: 1px solid #a2a9b1;
+      padding-bottom: 5px;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #a2a9b1;
     }
   </style>
 </head>
 <body>
-  <h1>Block Blast Simples</h1>
-  <div id="game-board"></div>
-  <button onclick="fillRandomBlock()">Adicionar Bloco</button>
+  <header>
+    <h1>WikiBlast</h1>
+    <p>A enciclopédia livre dos jogos</p>
+  </header>
 
-  <script>
-    const board = document.getElementById('game-board');
-    const cells = [];
+  <nav>
+    <ul>
+      <li><a href="#">Início</a></li>
+      <li><a href="#">Block Blast</a></li>
+      <li><a href="#">Jogos Populares</a></li>
+      <li><a href="#">História dos Puzzles</a></li>
+    </ul>
+  </nav>
 
-    // Cria a grade 10x10
-    for (let i = 0; i < 100; i++) {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
-      board.appendChild(cell);
-      cells.push(cell);
-    }
+  <main>
+    <h2>Block Blast</h2>
+    <p><strong>Block Blast</strong> é um jogo de quebra-cabeça viciante onde o objetivo é preencher linhas ou colunas inteiras com blocos coloridos. Diferente do Tetris tradicional, o jogador posiciona as peças livremente até não haver mais espaço disponível.</p>
 
-    // Função simples para simular bloco
-    function fillRandomBlock() {
-      const emptyCells = cells.filter(cell => !cell.classList.contains('filled'));
-      if (emptyCells.length === 0) {
-        alert('Fim de jogo!');
-        return;
-      }
-      const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-      randomCell.classList.add('filled');
-    }
-  </script>
+    <h3>Mecânica</h3>
+    <p>O jogo apresenta peças de formatos variados que devem ser arrastadas para a grade 10x10. Quando uma linha ou coluna é preenchida, ela é eliminada e o jogador marca pontos.</p>
+
+    <h3>Desenvolvimento</h3>
+    <p>Block Blast foi desenvolvido por estúdios independentes e rapidamente se popularizou por sua simplicidade e desafio progressivo.</p>
+  </main>
+
+  <footer>
+    Conteúdo disponível sob licença Creative Commons. Este site é apenas um projeto fictício inspirado na Wikipedia.
+  </footer>
 </body>
 </html>
