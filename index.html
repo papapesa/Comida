@@ -1,90 +1,71 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GameHub Max</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Block Blast Clone</title>
   <style>
     body {
-      margin: 0;
       font-family: sans-serif;
-      background-color: #0f0f0f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #111;
       color: white;
     }
-    header {
-      background-color: #1a1a1a;
-      padding: 20px;
-      text-align: center;
-      font-size: 32px;
-      font-weight: bold;
-    }
-    .games {
+
+    #game-board {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      grid-template-columns: repeat(10, 30px);
+      grid-template-rows: repeat(10, 30px);
+      gap: 2px;
+      margin-top: 20px;
     }
-    .game {
-      background-color: #1f1f1f;
-      border-radius: 10px;
-      overflow: hidden;
-      padding: 10px;
+
+    .cell {
+      width: 30px;
+      height: 30px;
+      background-color: #333;
+      border: 1px solid #222;
     }
-    .game h3 {
-      margin: 10px 0;
-      font-size: 18px;
+
+    .filled {
+      background-color: #00BCD4;
     }
-    iframe {
-      width: 100%;
-      height: 350px;
-      border: none;
-      border-radius: 8px;
-    }
-    footer {
-      background-color: #1a1a1a;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
+  <h1>Block Blast Simples</h1>
+  <div id="game-board"></div>
+  <button onclick="fillRandomBlock()">Adicionar Bloco</button>
 
-<header>GameHub Max - 24 Jogos Online</header>
+  <script>
+    const board = document.getElementById('game-board');
+    const cells = [];
 
-<div class="games">
-  <!-- Apenas 6 listados aqui como exemplo, depois coloco os outros 18 abaixo -->
-  <div class="game"><h3>Jogo da Velha</h3><iframe src="https://play.famobi.com/tic-tac-toe-classic"></iframe></div>
-  <div class="game"><h3>Sling Drift</h3><iframe src="https://play.famobi.com/sling-drift"></iframe></div>
-  <div class="game"><h3>Bubble Shooter</h3><iframe src="https://play.famobi.com/bubble-shooter"></iframe></div>
-  <div class="game"><h3>2048</h3><iframe src="https://play.famobi.com/2048"></iframe></div>
-  <div class="game"><h3>Cut the Rope</h3><iframe src="https://play.famobi.com/cut-the-rope"></iframe></div>
-  <div class="game"><h3>Mahjong World</h3><iframe src="https://play.famobi.com/mahjong-world"></iframe></div>
+    // Cria a grade 10x10
+    for (let i = 0; i < 100; i++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      board.appendChild(cell);
+      cells.push(cell);
+    }
 
-  <!-- 18 jogos adicionais -->
-  <div class="game"><h3>Penalty Kicks</h3><iframe src="https://play.famobi.com/penalty-kicks"></iframe></div>
-  <div class="game"><h3>Solitaire Classic</h3><iframe src="https://play.famobi.com/solitaire-classic"></iframe></div>
-  <div class="game"><h3>Jelly Collapse</h3><iframe src="https://play.famobi.com/jelly-collapse"></iframe></div>
-  <div class="game"><h3>Connect the Dots</h3><iframe src="https://play.famobi.com/connect-the-dots"></iframe></div>
-  <div class="game"><h3>Knife Rain</h3><iframe src="https://play.famobi.com/knife-rain"></iframe></div>
-  <div class="game"><h3>Snake and Ladders</h3><iframe src="https://play.famobi.com/snakes-and-ladders"></iframe></div>
-  <div class="game"><h3>Smarty Bubbles</h3><iframe src="https://play.famobi.com/smarty-bubbles"></iframe></div>
-  <div class="game"><h3>3D Free Kick</h3><iframe src="https://play.famobi.com/3d-free-kick"></iframe></div>
-  <div class="game"><h3>Sudoku Classic</h3><iframe src="https://play.famobi.com/sudoku-classic"></iframe></div>
-  <div class="game"><h3>Basketball Stars</h3><iframe src="https://play.famobi.com/basketball-stars"></iframe></div>
-  <div class="game"><h3>Power Badminton</h3><iframe src="https://play.famobi.com/power-badminton"></iframe></div>
-  <div class="game"><h3>Street Ball Jam</h3><iframe src="https://play.famobi.com/street-ball-jam"></iframe></div>
-  <div class="game"><h3>Foot Chinko</h3><iframe src="https://play.famobi.com/foot-chinko"></iframe></div>
-  <div class="game"><h3>Gold Miner</h3><iframe src="https://play.famobi.com/gold-miner"></iframe></div>
-  <div class="game"><h3>Jewelish</h3><iframe src="https://play.famobi.com/jewelish"></iframe></div>
-  <div class="game"><h3>Hex Blitz</h3><iframe src="https://play.famobi.com/hex-blitz"></iframe></div>
-  <div class="game"><h3>Fuzzies</h3><iframe src="https://play.famobi.com/fuzzies"></iframe></div>
-  <div class="game"><h3>Word Search</h3><iframe src="https://play.famobi.com/word-search-classic"></iframe></div>
-</div>
-
-<footer>
-  © 2025 GameHub Max - Criado por Você!
-</footer>
-
+    // Função simples para simular bloco
+    function fillRandomBlock() {
+      const emptyCells = cells.filter(cell => !cell.classList.contains('filled'));
+      if (emptyCells.length === 0) {
+        alert('Fim de jogo!');
+        return;
+      }
+      const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+      randomCell.classList.add('filled');
+    }
+  </script>
 </body>
 </html>
