@@ -1,90 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>GameHub Max</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portal de Jogos</title>
   <style>
     body {
-      margin: 0;
-      font-family: sans-serif;
-      background-color: #0f0f0f;
+      font-family: Arial, sans-serif;
+      background: #1e1e2f;
       color: white;
-    }
-    header {
-      background-color: #1a1a1a;
-      padding: 20px;
       text-align: center;
-      font-size: 32px;
-      font-weight: bold;
     }
-    .games {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-    .game {
-      background-color: #1f1f1f;
-      border-radius: 10px;
-      overflow: hidden;
-      padding: 10px;
-    }
-    .game h3 {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-    iframe {
-      width: 100%;
-      height: 350px;
+    .game-list button {
+      margin: 10px;
+      padding: 10px 20px;
+      background: #3a3af5;
+      color: white;
       border: none;
+      cursor: pointer;
       border-radius: 8px;
     }
-    footer {
-      background-color: #1a1a1a;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+    iframe {
+      margin-top: 20px;
+      width: 80%;
+      height: 500px;
+      border: none;
+      border-radius: 12px;
     }
   </style>
 </head>
 <body>
+  <h1>Portal de Jogos</h1>
+  <div class="game-list">
+    <button onclick="loadGame('https://example.com/jogo1')">Jogo 1</button>
+    <button onclick="loadGame('https://example.com/jogo2')">Jogo 2</button>
+    <button onclick="loadGame('https://example.com/jogo3')">Jogo 3</button>
+  </div>
+  <iframe id="gameFrame" src=""></iframe>
 
-<header>GameHub Max - 24 Jogos Online</header>
-
-<div class="games">
-  <!-- Apenas 6 listados aqui como exemplo, depois coloco os outros 18 abaixo -->
-  <div class="game"><h3>Jogo da Velha</h3><iframe src="https://play.famobi.com/tic-tac-toe-classic"></iframe></div>
-  <div class="game"><h3>Sling Drift</h3><iframe src="https://play.famobi.com/sling-drift"></iframe></div>
-  <div class="game"><h3>Bubble Shooter</h3><iframe src="https://play.famobi.com/bubble-shooter"></iframe></div>
-  <div class="game"><h3>2048</h3><iframe src="https://play.famobi.com/2048"></iframe></div>
-  <div class="game"><h3>Cut the Rope</h3><iframe src="https://play.famobi.com/cut-the-rope"></iframe></div>
-  <div class="game"><h3>Mahjong World</h3><iframe src="https://play.famobi.com/mahjong-world"></iframe></div>
-
-  <!-- 18 jogos adicionais -->
-  <div class="game"><h3>Penalty Kicks</h3><iframe src="https://play.famobi.com/penalty-kicks"></iframe></div>
-  <div class="game"><h3>Solitaire Classic</h3><iframe src="https://play.famobi.com/solitaire-classic"></iframe></div>
-  <div class="game"><h3>Jelly Collapse</h3><iframe src="https://play.famobi.com/jelly-collapse"></iframe></div>
-  <div class="game"><h3>Connect the Dots</h3><iframe src="https://play.famobi.com/connect-the-dots"></iframe></div>
-  <div class="game"><h3>Knife Rain</h3><iframe src="https://play.famobi.com/knife-rain"></iframe></div>
-  <div class="game"><h3>Snake and Ladders</h3><iframe src="https://play.famobi.com/snakes-and-ladders"></iframe></div>
-  <div class="game"><h3>Smarty Bubbles</h3><iframe src="https://play.famobi.com/smarty-bubbles"></iframe></div>
-  <div class="game"><h3>3D Free Kick</h3><iframe src="https://play.famobi.com/3d-free-kick"></iframe></div>
-  <div class="game"><h3>Sudoku Classic</h3><iframe src="https://play.famobi.com/sudoku-classic"></iframe></div>
-  <div class="game"><h3>Basketball Stars</h3><iframe src="https://play.famobi.com/basketball-stars"></iframe></div>
-  <div class="game"><h3>Power Badminton</h3><iframe src="https://play.famobi.com/power-badminton"></iframe></div>
-  <div class="game"><h3>Street Ball Jam</h3><iframe src="https://play.famobi.com/street-ball-jam"></iframe></div>
-  <div class="game"><h3>Foot Chinko</h3><iframe src="https://play.famobi.com/foot-chinko"></iframe></div>
-  <div class="game"><h3>Gold Miner</h3><iframe src="https://play.famobi.com/gold-miner"></iframe></div>
-  <div class="game"><h3>Jewelish</h3><iframe src="https://play.famobi.com/jewelish"></iframe></div>
-  <div class="game"><h3>Hex Blitz</h3><iframe src="https://play.famobi.com/hex-blitz"></iframe></div>
-  <div class="game"><h3>Fuzzies</h3><iframe src="https://play.famobi.com/fuzzies"></iframe></div>
-  <div class="game"><h3>Word Search</h3><iframe src="https://play.famobi.com/word-search-classic"></iframe></div>
-</div>
-
-<footer>
-  © 2025 GameHub Max - Criado por Você!
-</footer>
-
+  <script>
+    function loadGame(url) {
+      document.getElementById('gameFrame').src = url;
+    }
+  </script>
 </body>
 </html>
