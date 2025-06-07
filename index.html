@@ -1,90 +1,179 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br" >
 <head>
-  <meta charset="UTF-8">
-  <title>GameHub Max</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>Site de Jogos Pam Pam</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      font-family: sans-serif;
-      background-color: #0f0f0f;
-      color: white;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
     header {
-      background-color: #1a1a1a;
-      padding: 20px;
-      text-align: center;
-      font-size: 32px;
-      font-weight: bold;
-    }
-    .games {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-    .game {
-      background-color: #1f1f1f;
-      border-radius: 10px;
-      overflow: hidden;
-      padding: 10px;
-    }
-    .game h3 {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-    iframe {
       width: 100%;
-      height: 350px;
-      border: none;
-      border-radius: 8px;
-    }
-    footer {
-      background-color: #1a1a1a;
+      padding: 30px 0;
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      font-size: 3rem;
+      letter-spacing: 0.2em;
+      color: #ff416c;
+      text-shadow:
+        0 0 10px #ff416c,
+        0 0 20px #ff416c,
+        0 0 40px #ff416c,
+        0 0 80px #ff416c;
     }
+
+    main {
+      max-width: 1200px;
+      width: 90%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+      margin-bottom: 60px;
+    }
+
+    .game-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow:
+        0 0 10px #ff416c,
+        inset 0 0 20px #ff416c;
+      padding: 20px;
+      cursor: pointer;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .game-card:hover {
+      transform: scale(1.1);
+      box-shadow:
+        0 0 20px #ff416c,
+        inset 0 0 40px #ff416c;
+    }
+
+    .game-image {
+      width: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+      height: 160px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 20px #ff416c;
+      transition: filter 0.3s ease;
+    }
+
+    .game-card:hover .game-image {
+      filter: brightness(1.2);
+    }
+
+    .game-title {
+      font-size: 1.6rem;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 8px #ff416c;
+    }
+
+    .game-description {
+      font-size: 1rem;
+      margin: 0 0 20px;
+      text-align: center;
+      color: #f0f0f0cc;
+      flex-grow: 1;
+    }
+
+    .play-button {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      border: none;
+      border-radius: 30px;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow:
+        0 0 15px #ff416c;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    .play-button:hover {
+      background: linear-gradient(45deg, #ff4b2b, #ff416c);
+      box-shadow:
+        0 0 25px #ff4b2b;
+      transform: scale(1.1);
+    }
+
+    footer {
+      width: 100%;
+      padding: 15px 0;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ff416c99;
+      text-shadow:
+        0 0 5px #ff416c55;
+      margin-top: auto;
+    }
+
   </style>
 </head>
 <body>
+  <header>JOGOS PAM PAM</header>
+  <main>
+    <div class="game-card" onclick="alert('Jogo Aventura iniciado!')">
+      <img
+        src="https://cdn.pixabay.com/photo/2016/04/01/09/56/game-1302767_1280.png"
+        alt="Aventura Épica"
+        class="game-image"
+      />
+      <h2 class="game-title">Aventura Épica</h2>
+      <p class="game-description">
+        Explore mundos incríveis e desafios de tirar o fôlego!
+      </p>
+      <button class="play-button">Jogar</button>
+    </div>
 
-<header>GameHub Max - 24 Jogos Online</header>
+    <div class="game-card" onclick="alert('Jogo Corrida Radical iniciado!')">
+      <img
+        src="https://cdn.pixabay.com/photo/2017/01/12/21/30/game-1974597_1280.png"
+        alt="Corrida Radical"
+        class="game-image"
+      />
+      <h2 class="game-title">Corrida Radical</h2>
+      <p class="game-description">
+        Sinta a velocidade e ganhe todas as corridas!
+      </p>
+      <button class="play-button">Jogar</button>
+    </div>
 
-<div class="games">
-  <!-- Apenas 6 listados aqui como exemplo, depois coloco os outros 18 abaixo -->
-  <div class="game"><h3>Jogo da Velha</h3><iframe src="https://play.famobi.com/tic-tac-toe-classic"></iframe></div>
-  <div class="game"><h3>Sling Drift</h3><iframe src="https://play.famobi.com/sling-drift"></iframe></div>
-  <div class="game"><h3>Bubble Shooter</h3><iframe src="https://play.famobi.com/bubble-shooter"></iframe></div>
-  <div class="game"><h3>2048</h3><iframe src="https://play.famobi.com/2048"></iframe></div>
-  <div class="game"><h3>Cut the Rope</h3><iframe src="https://play.famobi.com/cut-the-rope"></iframe></div>
-  <div class="game"><h3>Mahjong World</h3><iframe src="https://play.famobi.com/mahjong-world"></iframe></div>
-
-  <!-- 18 jogos adicionais -->
-  <div class="game"><h3>Penalty Kicks</h3><iframe src="https://play.famobi.com/penalty-kicks"></iframe></div>
-  <div class="game"><h3>Solitaire Classic</h3><iframe src="https://play.famobi.com/solitaire-classic"></iframe></div>
-  <div class="game"><h3>Jelly Collapse</h3><iframe src="https://play.famobi.com/jelly-collapse"></iframe></div>
-  <div class="game"><h3>Connect the Dots</h3><iframe src="https://play.famobi.com/connect-the-dots"></iframe></div>
-  <div class="game"><h3>Knife Rain</h3><iframe src="https://play.famobi.com/knife-rain"></iframe></div>
-  <div class="game"><h3>Snake and Ladders</h3><iframe src="https://play.famobi.com/snakes-and-ladders"></iframe></div>
-  <div class="game"><h3>Smarty Bubbles</h3><iframe src="https://play.famobi.com/smarty-bubbles"></iframe></div>
-  <div class="game"><h3>3D Free Kick</h3><iframe src="https://play.famobi.com/3d-free-kick"></iframe></div>
-  <div class="game"><h3>Sudoku Classic</h3><iframe src="https://play.famobi.com/sudoku-classic"></iframe></div>
-  <div class="game"><h3>Basketball Stars</h3><iframe src="https://play.famobi.com/basketball-stars"></iframe></div>
-  <div class="game"><h3>Power Badminton</h3><iframe src="https://play.famobi.com/power-badminton"></iframe></div>
-  <div class="game"><h3>Street Ball Jam</h3><iframe src="https://play.famobi.com/street-ball-jam"></iframe></div>
-  <div class="game"><h3>Foot Chinko</h3><iframe src="https://play.famobi.com/foot-chinko"></iframe></div>
-  <div class="game"><h3>Gold Miner</h3><iframe src="https://play.famobi.com/gold-miner"></iframe></div>
-  <div class="game"><h3>Jewelish</h3><iframe src="https://play.famobi.com/jewelish"></iframe></div>
-  <div class="game"><h3>Hex Blitz</h3><iframe src="https://play.famobi.com/hex-blitz"></iframe></div>
-  <div class="game"><h3>Fuzzies</h3><iframe src="https://play.famobi.com/fuzzies"></iframe></div>
-  <div class="game"><h3>Word Search</h3><iframe src="https://play.famobi.com/word-search-classic"></iframe></div>
-</div>
-
-<footer>
-  © 2025 GameHub Max - Criado por Você!
-</footer>
-
+    <div class="game-card" onclick="alert('Jogo Tiro iniciado!')">
+      <img
+        src="https://cdn.pixabay.com/photo/2016/11/23/15/12/gamepad-1850812_1280.png"
+        alt="Tiro em Primeira Pessoa"
+        class="game-image"
+      />
+      <h2 class="game-title">Tiro em Primeira Pessoa</h2>
+      <p class="game-description">
+        Mostre sua mira e sobreviva a ondas de inimigos!
+      </p>
+      <button class="play-button">Jogar</button>
+    </div>
+  </main>
+  <footer>© 2025 Jogos Pam Pam. Todos os direitos reservados.</footer>
 </body>
 </html>
