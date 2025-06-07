@@ -1,179 +1,138 @@
 <!DOCTYPE html>
-<html lang="pt-br" >
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>Site de Jogos Pam Pam</title>
+  <title>Jogos Pam Pam</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       color: #fff;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
     }
 
     header {
       width: 100%;
-      padding: 30px 0;
       text-align: center;
-      font-size: 3rem;
-      letter-spacing: 0.2em;
+      padding: 30px 0;
+      font-size: 2.5rem;
       color: #ff416c;
-      text-shadow:
-        0 0 10px #ff416c,
-        0 0 20px #ff416c,
-        0 0 40px #ff416c,
-        0 0 80px #ff416c;
+      text-shadow: 0 0 10px #ff416c;
+      border-bottom: 2px solid #ff416c44;
     }
 
     main {
+      width: 100%;
       max-width: 1200px;
-      width: 90%;
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 2rem;
-      margin-bottom: 60px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
     }
 
     .game-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      box-shadow:
-        0 0 10px #ff416c,
-        inset 0 0 20px #ff416c;
-      padding: 20px;
-      cursor: pointer;
-      transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+      background: #1f1f1f;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 15px #ff416c66;
+      transition: transform 0.3s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     .game-card:hover {
-      transform: scale(1.1);
-      box-shadow:
-        0 0 20px #ff416c,
-        inset 0 0 40px #ff416c;
+      transform: scale(1.05);
     }
 
     .game-image {
       width: 100%;
-      border-radius: 15px;
+      height: 150px;
       object-fit: cover;
-      height: 160px;
-      margin-bottom: 15px;
-      box-shadow: 0 0 20px #ff416c;
-      transition: filter 0.3s ease;
     }
 
-    .game-card:hover .game-image {
-      filter: brightness(1.2);
+    .game-info {
+      padding: 15px;
+      text-align: center;
     }
 
     .game-title {
-      font-size: 1.6rem;
-      margin: 0 0 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      text-shadow: 0 0 8px #ff416c;
+      font-size: 1.4rem;
+      margin: 10px 0;
+      color: #ff416c;
     }
 
     .game-description {
-      font-size: 1rem;
-      margin: 0 0 20px;
-      text-align: center;
-      color: #f0f0f0cc;
-      flex-grow: 1;
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 15px;
     }
 
     .play-button {
-      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      background: #ff416c;
       border: none;
-      border-radius: 30px;
-      padding: 12px 30px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: white;
-      text-transform: uppercase;
+      padding: 10px 25px;
+      border-radius: 25px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
       cursor: pointer;
-      box-shadow:
-        0 0 15px #ff416c;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
+      transition: background 0.3s ease;
     }
 
     .play-button:hover {
-      background: linear-gradient(45deg, #ff4b2b, #ff416c);
-      box-shadow:
-        0 0 25px #ff4b2b;
-      transform: scale(1.1);
+      background: #ff2a55;
     }
 
     footer {
-      width: 100%;
-      padding: 15px 0;
-      text-align: center;
+      padding: 20px;
       font-size: 0.9rem;
-      color: #ff416c99;
-      text-shadow:
-        0 0 5px #ff416c55;
-      margin-top: auto;
+      color: #ccc;
+      text-align: center;
     }
-
   </style>
 </head>
 <body>
-  <header>JOGOS PAM PAM</header>
+  <header>🎮 Jogos Pam Pam 🎮</header>
+
   <main>
-    <div class="game-card" onclick="alert('Jogo Aventura iniciado!')">
-      <img
-        src="https://cdn.pixabay.com/photo/2016/04/01/09/56/game-1302767_1280.png"
-        alt="Aventura Épica"
-        class="game-image"
-      />
-      <h2 class="game-title">Aventura Épica</h2>
-      <p class="game-description">
-        Explore mundos incríveis e desafios de tirar o fôlego!
-      </p>
-      <button class="play-button">Jogar</button>
+    <div class="game-card">
+      <img src="https://cdn.pixabay.com/photo/2016/04/01/09/56/game-1302767_1280.png" alt="Aventura Épica" class="game-image">
+      <div class="game-info">
+        <h2 class="game-title">Aventura Épica</h2>
+        <p class="game-description">Explore mundos incríveis e viva grandes aventuras!</p>
+        <button class="play-button" onclick="alert('Abrindo Aventura Épica...')">Jogar</button>
+      </div>
     </div>
 
-    <div class="game-card" onclick="alert('Jogo Corrida Radical iniciado!')">
-      <img
-        src="https://cdn.pixabay.com/photo/2017/01/12/21/30/game-1974597_1280.png"
-        alt="Corrida Radical"
-        class="game-image"
-      />
-      <h2 class="game-title">Corrida Radical</h2>
-      <p class="game-description">
-        Sinta a velocidade e ganhe todas as corridas!
-      </p>
-      <button class="play-button">Jogar</button>
+    <div class="game-card">
+      <img src="https://cdn.pixabay.com/photo/2017/01/12/21/30/game-1974597_1280.png" alt="Corrida Radical" class="game-image">
+      <div class="game-info">
+        <h2 class="game-title">Corrida Radical</h2>
+        <p class="game-description">Velocidade máxima! Supere todos os adversários.</p>
+        <button class="play-button" onclick="alert('Iniciando Corrida Radical...')">Jogar</button>
+      </div>
     </div>
 
-    <div class="game-card" onclick="alert('Jogo Tiro iniciado!')">
-      <img
-        src="https://cdn.pixabay.com/photo/2016/11/23/15/12/gamepad-1850812_1280.png"
-        alt="Tiro em Primeira Pessoa"
-        class="game-image"
-      />
-      <h2 class="game-title">Tiro em Primeira Pessoa</h2>
-      <p class="game-description">
-        Mostre sua mira e sobreviva a ondas de inimigos!
-      </p>
-      <button class="play-button">Jogar</button>
+    <div class="game-card">
+      <img src="https://cdn.pixabay.com/photo/2016/11/23/15/12/gamepad-1850812_1280.png" alt="Tiro em Primeira Pessoa" class="game-image">
+      <div class="game-info">
+        <h2 class="game-title">FPS Neon</h2>
+        <p class="game-description">Teste sua mira e reações neste jogo de tiro intenso.</p>
+        <button class="play-button" onclick="alert('Abrindo FPS Neon...')">Jogar</button>
+      </div>
     </div>
   </main>
+
   <footer>© 2025 Jogos Pam Pam. Todos os direitos reservados.</footer>
 </body>
 </html>
