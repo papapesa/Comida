@@ -1,18 +1,87 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html><html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MC Clone Mobile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copa Camões</title>
   <style>
-    body, html { margin:0; padding:0; overflow:hidden; height:100%; }
-    #game-container { width:100%; height:100%; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #003366;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003366;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #eee;
+      font-size: 0.9rem;
+    }
+    .vote-box {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #e6f2ff;
+      border: 1px solid #b3d1ff;
+      border-radius: 8px;
+    }
+    button {
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #vote-result {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <div id="game-container"></div>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
-  <!-- Incluir o script da demo do MinecraftClone (via rawcdn) -->
-  <script src="https://rawcdn.githack.com/Atlas8t/MinecraftClone/main/index.html"></script>
-</body>
+  <header>
+    <h1>Copa Camões</h1>
+    <p>Portugal e Brasil unidos pelo futebol e pela língua portuguesa</p>
+  </header>  <section>
+    <h2>O que é a Copa Camões?</h2>
+    <p>A Copa Camões é uma proposta de competição amistosa entre clubes ou seleções de Portugal e do Brasil, celebrando a herança cultural comum através do desporto mais popular dos dois países: o futebol.</p><h2>Objetivos</h2>
+<ul>
+  <li>Promover a amizade e cooperação lusófona</li>
+  <li>Unir futebol e cultura numa só celebração</li>
+  <li>Homenagear Luís de Camões, símbolo da língua portuguesa</li>
+</ul>
+
+<h2>Formato sugerido</h2>
+<p>Um jogo anual entre os campeões do Brasileirão e da Primeira Liga, ou torneios alternados entre Portugal e Brasil com seleções Sub-20, femininas ou principais.</p>
+
+<div class="vote-box">
+  <h2>Gostaria que a Copa Camões se tornasse realidade?</h2>
+  <button onclick="vote('sim')">Sim</button>
+  <button onclick="vote('nao')">Não</button>
+  <div id="vote-result"></div>
+</div>
+
+  </section>  <footer>
+    &copy; 2025 Copa Camões. Projeto fictício desenvolvido como proposta cultural-esportiva.
+  </footer>  <script>
+    let votos = { sim: 0, nao: 0 };
+
+    function vote(opcao) {
+      votos[opcao]++;
+      document.getElementById('vote-result').innerText = `Votos - Sim: ${votos.sim} | Não: ${votos.nao}`;
+    }
+  </script></body>
 </html>
