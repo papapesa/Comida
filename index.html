@@ -72,6 +72,7 @@
   <button id="btn-sim" onclick="vote('sim')">Sim</button>
   <button id="btn-nao" onclick="vote('nao')">Não</button>
   <div id="vote-result"></div>
+  <button onclick="resetVoto()">Resetar Voto (teste)</button>
 </div>
 
   </section>  <footer>
@@ -99,6 +100,13 @@
       document.getElementById('btn-sim').disabled = true;
       document.getElementById('btn-nao').disabled = true;
       document.getElementById('vote-result').innerText = `Votos - Sim: ${votos.sim} | Não: ${votos.nao}`;
+    }
+
+    function resetVoto() {
+      localStorage.removeItem('votoCamoes');
+      document.getElementById('btn-sim').disabled = false;
+      document.getElementById('btn-nao').disabled = false;
+      document.getElementById('vote-result').innerText = '';
     }
 
     updateUI();
