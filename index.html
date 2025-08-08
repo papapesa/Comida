@@ -84,7 +84,7 @@
       if (result) {
         document.getElementById('btn-sim').disabled = true;
         document.getElementById('btn-nao').disabled = true;
-        document.getElementById('vote-result').innerText = `Você já votou: ${result.charAt(0).toUpperCase() + result.slice(1)}`;
+        document.getElementById('vote-result').innerText = `Votos - Sim: ${votos.sim} | Não: ${votos.nao}`;
       }
     }
 
@@ -98,7 +98,7 @@
       localStorage.setItem('votoCamoes', opcao);
       document.getElementById('btn-sim').disabled = true;
       document.getElementById('btn-nao').disabled = true;
-      document.getElementById('vote-result').innerText = `Você votou: ${opcao.charAt(0).toUpperCase() + opcao.slice(1)}`;
+      document.getElementById('vote-result').innerText = `Votos - Sim: ${votos.sim} | Não: ${votos.nao}`;
     }
 
     updateUI();
