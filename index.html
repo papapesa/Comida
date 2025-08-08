@@ -69,8 +69,8 @@
 
 <div class="vote-box">
   <h2>Gostaria que a Copa Camões se tornasse realidade?</h2>
-  <button onclick="vote('sim')">Sim</button>
-  <button onclick="vote('nao')">Não</button>
+  <button id="btn-sim" onclick="vote('sim')">Sim</button>
+  <button id="btn-nao" onclick="vote('nao')">Não</button>
   <div id="vote-result"></div>
 </div>
 
@@ -79,9 +79,28 @@
   </footer>  <script>
     let votos = { sim: 0, nao: 0 };
 
-    function vote(opcao) {
-      votos[opcao]++;
-      document.getElementById('vote-result').innerText = `Votos - Sim: ${votos.sim} | Não: ${votos.nao}`;
+    function updateUI() {
+      const result = localStorage.getItem('votoCamoes');
+      if (result) {
+        document.getElementById('btn-sim').disabled = true;
+        document.getElementById('btn-nao').disabled = true;
+        document.getElementById('vote-result').innerText = `Você já votou: ${result.charAt(0).toUpperCase() + result.slice(1)}`;
+      }
     }
+
+    function vote(opcao) {
+      if (localStorage.getItem('votoCamoes')) {
+        alert('Você já votou. Obrigado!');
+        return;
+      }
+
+      votos[opcao]++;
+      localStorage.setItem('votoCamoes', opcao);
+      document.getElementById('btn-sim').disabled = true;
+      document.getElementById('btn-nao').disabled = true;
+      document.getElementById('vote-result').innerText = `Você votou: ${opcao.charAt(0).toUpperCase() + opcao.slice(1)}`;
+    }
+
+    updateUI();
   </script></body>
 </html>
